@@ -32,7 +32,7 @@ jobs:
 
     ## Building
     - name: Configure Makefile
-      run: python %{{github.workspace}}/scripts/mk_make.py
+      run: python ${{github.workspace}}/scripts/mk_make.py
 
     - name: Build Z3
       run: |
