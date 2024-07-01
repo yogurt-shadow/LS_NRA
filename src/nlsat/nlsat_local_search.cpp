@@ -2758,13 +2758,13 @@ namespace nlsat {
         }
 
         void restore_slacked_clauses() {
-            m_vars_visited2.reset();
+            m_vars_visited.reset();
             for (int i = 0; i < m_nra_literals.size(); i++) {
                 nra_literal * curr_literal = m_nra_literals[i];
                 if (curr_literal->is_slacked()) {
                     for (var v : curr_literal->m_vars) {
-                        if (!m_vars_visited2.contains(v)) {
-                            m_vars_visited2.insert(v);
+                        if (!m_vars_visited.contains(v)) {
+                            m_vars_visited.insert(v);
                         }
                     }
                     curr_literal->unset_slack_atoms();
@@ -2774,7 +2774,7 @@ namespace nlsat {
                 }
             }
             if (m_use_incremental) { // Recompute boundaries
-                for (auto it = m_vars_visited2.begin(); it != m_vars_visited2.end(); it++) {
+                for (auto it = m_vars_visited.begin(); it != m_vars_visited.end(); it++) {
                     compute_arith_var_info(*it);
                     compute_boundary(*it);
                 }
